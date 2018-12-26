@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://cdn.bootcss.com/echarts/4.2.0-rc.2/echarts.js"></script>
+</head>
+
+<body>
+    <div id="Start" style="width: 800px;height: 600px;"></div>
+    <script>
+        let chart = echarts.init(document.getElementById('Start'));
+        var option = {
+            visualMap:
+            {
+                show: false,
+                type: 'piecewise',
+                spilitNumber: 3,
+                pieces: [
+                    { min: 0, max: 20 },
+                    { min: 20, max: 60 },
+                    { min: 60, },
+
+                ],
+                color: ['red', 'blue', 'red']
+            }
+            ,
+            title: {
+                // 配置可视化标题
+                text: "MyEcharts示例",
+
+            },
+
+
+            tooltip: {
+                // tooltip 配置鼠标hover显示提示的
+            },
+
+
+
+            legend: {
+                // 配置图例
+                // 注意 legend 与series的name 需要一致,否则图例无法显示
+                data: ['销量', '收入','自定义'],
+            },
+
+            xAxis: {
+                // x轴数据标签
+                data: ['x1', 'x2', 'x3', 'x4', 'x5'],
+                // data: ["2016-1", "2016-2", "2016-3", "2016-4", "2016-5", "2016-6", "2016-7", "2016-8", "2016-9", "2016-10", "2016-11", "2016-12"]
+            },
+            yAxis: {
+                // min: 0,
+                // max: 100
+            },
+
+            series: [
+                //series 配置数据
+                //name 与legend中配置的一致
+                //type 配置图表类型 如bar、line、pie...etc
+                //data 配置数据，不同图表的data数据结构不同
+                {
+
+                    name: '销量',
+                    type: 'bar',
+                    // data: [5, 20, 36, 12, 70],
+
+                },
+                {
+                    name: '收入',
+                    type: 'line',
+                    smooth: true,
+                    data: [12, 13, 44, 100, 12],
+                    // smooth: true,
+                    // data: [2.6, 5.9, 9.0, 26.4, 28.7, 70.7, 175.6, 182.2, 48.7, 18.8, 6.0, 2.3]
+
+
+                },
+                {
+                    name: '自定义',
+                    type: 'custom',
+                    renderItem: function (params, api) {
+                        // 对于 data 中的每个 dataItem，都会调用这个 renderItem 函数。
+                        // （但是注意，并不一定是按照 data 的顺序调用）
+
+                        // 这里进行一些处理，例如，坐标转换。
+                        // 这里使用 api.value(0) 取出当前 dataItem 中第一个维度的数值。
+                        var categoryIndex = api.value(0);
+                        // 这里使用 api.coord(...) 将数值在当前坐标系中转换成为屏幕上的点的像素值。
+                        var startPoint = api.coord([api.value(1), categoryIndex]);
+                        var endPoint = api.coord([api.value(2), categoryIndex]);
+                        // 这里使用 api.size(...) 获得 Y 轴上数值范围为 1 的一段所对应的像素长度。
+                        var height = api.size([0, 1])[1] * 0.6;
+
+                        // shape 属性描述了这个矩形的像素位置和大小。
+                        // 其中特殊得用到了 echarts.graphic.clipRectByRect，意思是，
+                        // 如果矩形超出了当前坐标系的包围盒，则剪裁这个矩形。
+                        // 如果矩形完全被剪掉，会返回 undefined.
+                        var rectShape = echarts.graphic.clipRectByRect({
+                            // 矩形的位置和大小。
+                            x: startPoint[0],
+                            y: startPoint[1] - height / 2,
+                            width: endPoint[0] - startPoint[0],
+                            height: height
+                        }, {
+                                // 当前坐标系的包围盒。
+                                x: params.coordSys.x,
+                                y: params.coordSys.y,
+                                width: params.coordSys.width,
+                                height: params.coordSys.height
+                            });
+
+                        // 这里返回为这个 dataItem 构建的图形元素定义。
+                        return rectShape && {
+                            // 表示这个图形元素是矩形。还可以是 'circle', 'sector', 'polygon' 等等。
+                            type: 'rect',
+                            shape: rectShape,
+                            // 用 api.style(...) 得到默认的样式设置。这个样式设置包含了
+                            // option 中 itemStyle 的配置和视觉映射得到的颜色。
+                            style: api.style()
+                        };
+                    },
+                    data: [
+                        [12, 44, 55, 60], // 这是第一个 dataItem
+                        [53, 31, 21, 56], // 这是第二个 dataItem
+                        [71, 33, 10, 20], // 这是第三个 dataItem
+                        
+                         ]
+                }
+
+            ],
+        }
+        chart.setOption(option);
+        console.log(chart.getHeight());
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Module</title>
+    <script src="https://cdn.bootcss.com/echarts/4.2.0-rc.2/echarts.js"></script>
+</head>
+
+<body>
+    <div id="Main" style="width: 800px;height: 600px;"></div>
+    <script>
+        let chart = echarts.init(document.getElementById('Main'));
+        function renderItem(params, api) {
+            let point = api.coord(
+                [a[i.value()]]
+            )
+            return{
+                type:'path',
+                position:'',
+            };
+
+
+        }
+        var option = {
+            title: {
+                // 配置可视化标题
+                text: "MyEcharts示例",
+            },
+            tooltip: {
+                // tooltip 配置鼠标hover显示提示的
+            },
+            legend: {
+                // 配置图例
+                // 注意 legend 与series的name 需要一致,否则图例无法显示
+                data: ['销量', '收入', '自定义'],
+            },
+            xAxis: {
+                // x轴数据标签
+                data: [2013,2014,2015,2016,2017,2018,2019]
+                // scale:true
+            },
+            yAxis: {
+
+            },
+            dataZoom: {
+                xAxisIndex: 0,
+                filterMode: 'weakFilter'
+            },
+            series: [
+                {
+                    // name: '自定义',
+                    type: 'custom',
+                    renderItem: renderItem,
+                    encode: {
+                        x: [2, 4, 3],
+                        y: 1,
+                        label: 0,
+                        tooltip: [2, 4, 3]
+                    },
+                    dimensions: [null, null, '年龄', '满意度'],
+                    data: [
+                        [2013, 16],
+                        [2014, 16],
+                        [2015, 16],
+                        [2016, 16],
+                        [2017, 16],
+                        [2018, 16].
+
+                    ]
+
+                }
+            ],
+        }
+        chart.setOption(option);
+        // console.log(chart.getHeight());
+    </script>
+</body>
+
+</html>
