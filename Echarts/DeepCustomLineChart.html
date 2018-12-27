@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html style="height: 100%">
+   <head>
+       <meta charset="utf-8">
+   </head>
+   <body style="height: 100%; margin: 0">
+       <div id="container" style="height: 100%"></div>
+       <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/echarts.min.js"></script>
+       <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts-gl/echarts-gl.min.js"></script>
+       <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts-stat/ecStat.min.js"></script>
+       <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/extension/dataTool.min.js"></script>
+       <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/map/js/china.js"></script>
+       <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/map/js/world.js"></script>
+       <script type="text/javascript" src="https://api.map.baidu.com/api?v=2.0&ak=ZUONbpqGBsYGXNIYHicvbAbM"></script>
+       <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/extension/bmap.min.js"></script>
+       <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/simplex.js"></script>
+       <script type="text/javascript">
+var dom = document.getElementById("container");
+var myChart = echarts.init(dom);
+var app = {};
+option = null;
+option = {
+    backgroundColor: '#010d2a',
+    title:{
+        text:'Event Growth Trend stactics',
+        
+        left:'8%',
+        top:'1%',
+        subtext:'10 Jan 2017 - 05 Feb2017  ∨',
+        textStyle:{
+            
+            fontSize:14,
+            fontFamily:'Rubik-Medium',
+            fontWeight:600,
+            color:'rgba(85,103,120,1)',
+            lineHeight:23,
+        },
+        subtextStyle:{
+            fontSize:9,
+            fontFamily:'Rubik-Medium',
+            fontWeight:500,
+            color:'#54667A',
+            lineHeight:23,
+        }
+    },
+    grid:{
+      show:true,  
+      borderColor:'rgba(231,231,231,0.23)',
+      opacity:0.21
+    },
+    xAxis: {
+        
+        splitLine:{
+　　　　    show:true,
+　　　　    lineStyle:{
+　　　　        color:'rgba(231,231,231,1)',
+　　　　        opacity:0.21
+　　　　    },
+　　　　    interval:2
+　　    },
+　　    axisLabel:{
+　　        interval:2
+　　    },
+        type: 'category',
+        boundaryGap: false,
+        axisLine: {
+            lineStyle: {
+                color: 'rgba(166,183,191,1)',
+                fontSize:8,
+                lineHeight:21,
+                fontFamily:'Rubik-Medium',
+                fontWeight:400,
+                opacity:0.21,
+                onZero:false
+                
+                
+            }
+        },
+        nameTextStyle:{
+            color:'rgba(166,183,191,1)',
+            fontSize:8,
+            
+        },
+        data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun','Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+    },
+    yAxis: {
+        
+        splitLine:{
+　　　　    show:true,
+　　　　    lineStyle:{
+　　　　        color:'rgba(231,231,231,1)',
+　　　　        opacity:0.21
+　　　　    }
+　　    },
+　　    
+        type: 'value',
+        axisLine: {
+            onZero:'fasle',
+            onZeroAxisIndex:1,
+            lineStyle: {
+                color: 'rgba(166,183,191,1)',
+                fontSize:8,
+                lineHeight:23,
+                fontFamily:'Rubik-Medium',
+                fontWeight:400,
+                opacity:0.21
+            }
+        },
+        axisLabel:{
+            formatter: function(value){
+              return value/1000 + 'K'
+            },
+            showMinLabel:false,
+            
+        }
+        
+    },
+    series: [{
+        data: [820, 932, 901, 234, 490, 830, 660,820, 932, 901, 934, 1290, 1330, 1320],
+        type: 'line',
+        symbol: "none",
+        smooth:true,
+        lineStyle:{
+            color:'rgba(149,26,254,0.05)'
+        },
+        areaStyle: {
+            color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                    offset: 0.89,
+                    color: 'rgba(149,26,254,0.89)'
+                }, {
+                    offset: 0,
+                    color: 'rgba(5,255,195,0)'
+                }])
+        }
+    },
+        {
+        data: [382, 532, 501, 554, 590, 730, 420,482, 532, 501, 554, 690, 730, 620],
+        type: 'line',
+        smooth:false,
+        symbolSize:10,
+        symbol:'circle',
+        itemStyle:{
+                    color:'#2EA3F3'   ,
+                    borderColor:'white',
+                    borderWidth:3,
+        },
+        lineStyle:{
+            normal:{
+                color:'#02CCA1',
+                width:5,
+                
+            }
+            
+        },
+        areaStyle: {
+             color: new echarts.graphic.LinearGradient(0, 0, 0.03, 1, [{
+                    offset: 0,
+                    color: 'rgba(0,249,190,1)'
+                }, {
+                    offset: 1,
+                    color: 'rgba(16,41,83,0.97)'
+                }])
+        }
+        
+    }
+    ]
+};
+;
+if (option && typeof option === "object") {
+    myChart.setOption(option, true);
+}
+       </script>
+   </body>
+</html>
