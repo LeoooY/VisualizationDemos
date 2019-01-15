@@ -28,12 +28,15 @@
     document.body.appendChild(renderer.domElement);
 
     var geometry = new THREE.BoxGeometry(1, 1, 1);
-    var material = new THREE.MeshBasicMaterial({ color: 'rgba(184, 102, 122, 1)' });
+    var material = new THREE.MeshBasicMaterial({ 
+      color: 'rgba(184, 102, 122, 1)', 
+      wireframe:true
+       });
     var cube = new THREE.Mesh(geometry, material);
     scene.add(cube);
 
     camera.position.z = 1.5;
-    cube.rotation.x += 0.5
+    cube.rotation.x = 0.5
 
     function animate() {
       requestAnimationFrame(animate);

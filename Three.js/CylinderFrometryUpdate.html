@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset=utf-8>
+  <title>My first three.js app</title>
+  <style>
+    body {
+      margin: 0;
+    }
+
+    canvas {
+      width: 100%;
+      height: 100%
+    }
+  </style>
+</head>
+
+<body>
+  <script src="three.js"></script>
+  <script>
+    // Our Javascript will go here.
+    var scene = new THREE.Scene();
+    var camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+    scene.background = new THREE.Color('#010d2a');
+    var renderer = new THREE.WebGLRenderer();
+    renderer.setSize(window.innerWidth - 0.1, window.innerHeight - 10);
+    document.body.appendChild(renderer.domElement);
+
+    var geometryTop = new THREE.CylinderBufferGeometry(1, 0.01, 0.01, 20, 3 );
+    var materialTop = new THREE.MeshBasicMaterial({
+      wireframe: true,
+      skinning: true,
+      color: 'rgb(0, 249, 183)'
+    
+      });
+    var cubeTop = new THREE.Mesh(geometryTop, materialTop);
+    
+    const TotalHeight=2;
+    let CylHeight_1=TotalHeight*0.5
+    let CylButmSize_1=(TotalHeight-CylHeight_1)/2;  
+    var geometry = new THREE.CylinderBufferGeometry(
+      1, 
+      CylButmSize_1, 
+      CylHeight_1, 
+      50, 8,true 
+      );
+    var material = new THREE.MeshBasicMaterial({
+      wireframe: true,
+      skinning: true,
+      color: 'rgb(0, 249, 183)'
+    
+      });
+    var cube = new THREE.Mesh(geometry, material);
+
+    let CylHeight_2=TotalHeight*0.15;
+    let CylButmSize_2=(TotalHeight-CylHeight_1-CylHeight_2)/2;  
+    var geometry2 = new THREE.CylinderBufferGeometry(
+      CylButmSize_1,
+      CylButmSize_2,
+       CylHeight_2, 
+       50, 7, true);
+    var material2 = new THREE.MeshBasicMaterial({
+      wireframe: true,
+      skinning: true,
+      color: '#55d4b9'
+
+    });    
+    var cube2 = new THREE.Mesh(geometry2, material2);
+
+    let CylHeight_3=TotalHeight*0.06;
+    let CylButmSize_3=(TotalHeight-CylHeight_1-CylHeight_2-CylHeight_3)/2;
+    var geometry3 = new THREE.CylinderBufferGeometry(
+      CylButmSize_2, CylButmSize_3, CylHeight_3, 50, 3, true
+      );
+    var material3 = new THREE.MeshBasicMaterial({
+      wireframe: true,
+      skinning: true,
+      color: '#a7f344'
+
+    });    
+    var cube3 = new THREE.Mesh(geometry3, material3);
+
+
+    let CylHeight_4=TotalHeight*0.29;
+    let CylButmSize_4=(TotalHeight-CylHeight_1-CylHeight_2-CylHeight_3-CylHeight_4)/2;
+    var geometry4 = new THREE.CylinderBufferGeometry(
+      CylButmSize_3, 
+      CylButmSize_4,
+     CylHeight_4,
+     40, 5, true);
+    var material4 = new THREE.MeshBasicMaterial({
+      wireframe: true,
+      skinning: true,
+      color: '#004ccb'
+
+    });    
+    var cube4 = new THREE.Mesh(geometry4, material4);
+
+    var light = new THREE.AmbientLight(0x404040); // soft white light
+    // scene.add(light);
+    scene.add(cube);
+    scene.add(cube2);
+    scene.add(cube3);
+    scene.add(cube4);
+    scene.add(cubeTop);
+
+    let v=new THREE.Vector3(0,0,0);
+    camera.position.set(0,0,2.5);
+    camera.lookAt(v);
+
+    
+
+    console.log(camera.position);
+    // camera.position.y = 0.2;
+    let PosY=0.6
+    cubeTop.position.y = PosY;
+    cube.position.y =PosY- CylHeight_1/2;
+    cube2.position.y = PosY-CylHeight_1-CylHeight_2/2;
+    cube3.position.y = PosY-CylHeight_1-CylHeight_2-CylHeight_3/2;
+    cube4.position.y = PosY-CylHeight_1-CylHeight_2-CylHeight_3-CylHeight_4/2;
+
+    let rotateX=0;
+    cubeTop.rotation.x += rotateX;
+    cube.rotation.x += rotateX;
+    cube2.rotation.x += rotateX;
+    cube3.rotation.x += rotateX;
+    cube4.rotation.x += rotateX;
+
+    cube2.rotation.x += 0;
+    let angel=3;
+    function animate() {
+      requestAnimationFrame(animate);
+      // cube.rotation.x += 0.01;
+      // cube.rotation.y -= 0.001;
+      // cube2.rotation.y -= 0.001;
+      // cube3.rotation.y -= 0.001;
+      // cube4.rotation.y -= 0.001;
+      // cubeTop.rotation.y -= 0.001;
+      // angel+=0.00001;
+      angel+=0.5
+      camera.position.z =2.5- 2.5*Math.cos(angel*Math.PI/180);
+      camera.position.x =0+ 2.5*Math.cos(angel*Math.PI/180);
+      console.log(camera.position.x);
+
+      
+      // if(camera.position.z<0 || camera.position.z>2.5){
+      //   camera.position.z+=0.001;
+      // }else{
+      //   camera.position.z-=0.001;
+      // }
+      
+      // camera.position.x+=0.001
+
+
+      // camera.position.x += 0+Math.sin(angel*Math.PI/180);
+      
+      // camera.rotation.y+=0.01;
+      // camera.lookAt(v);
+
+      renderer.render(scene, camera);
+    }
+    animate();
+  </script>
+</body>
+
+</html>
