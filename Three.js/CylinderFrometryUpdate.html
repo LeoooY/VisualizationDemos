@@ -23,104 +23,175 @@
     var scene = new THREE.Scene();
     var camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
     scene.background = new THREE.Color('#010d2a');
-    var renderer = new THREE.WebGLRenderer();
+    var renderer = new THREE.WebGLRenderer({
+      antialias: true,
+      alpha: true
+    });
     renderer.setSize(window.innerWidth - 0.1, window.innerHeight - 10);
     document.body.appendChild(renderer.domElement);
 
-    var geometryTop = new THREE.CylinderBufferGeometry(1, 0.01, 0.01, 20, 3 );
+    var geometryTop = new THREE.CylinderBufferGeometry(1, 0.01, 0.01, 40, 3);
     var materialTop = new THREE.MeshBasicMaterial({
       wireframe: true,
       skinning: true,
-      color: 'rgb(0, 249, 183)'
-    
-      });
+      // color: 'rgb(0, 249, 183)'
+      // color: 'rgb(0, 186, 144)'
+      color: 'rgb(0, 240, 155)',
+      opacity:0.85
+      
+    });
     var cubeTop = new THREE.Mesh(geometryTop, materialTop);
-    
-    const TotalHeight=2;
-    let CylHeight_1=TotalHeight*0.5
-    let CylButmSize_1=(TotalHeight-CylHeight_1)/2;  
+
+    const TotalHeight = 4.5;
+    let CylHeight_1 = TotalHeight * 0.25;
+    let CylButmSize_1 = (TotalHeight - CylHeight_1) / TotalHeight;
     var geometry = new THREE.CylinderBufferGeometry(
-      1, 
-      CylButmSize_1, 
-      CylHeight_1, 
-      50, 8,true 
-      );
+      1,
+      CylButmSize_1,
+      CylHeight_1,
+      40, 8, true
+    );
     var material = new THREE.MeshBasicMaterial({
       wireframe: true,
       skinning: true,
-      color: 'rgb(0, 249, 183)'
-    
-      });
+      color: 'rgb(0, 240, 160)'      
+    });
+    var materialColor = new THREE.MeshBasicMaterial({
+      color: 'rgb(0, 92, 87)',
+      transparent: true,
+      opacity: 0.4
+    });
     var cube = new THREE.Mesh(geometry, material);
-
-    let CylHeight_2=TotalHeight*0.15;
-    let CylButmSize_2=(TotalHeight-CylHeight_1-CylHeight_2)/2;  
+    var cubeColor = new THREE.Mesh(geometry, materialColor);
+    let CylHeight_2 = TotalHeight * 0.18;
+    let CylButmSize_2 = (TotalHeight - CylHeight_1 - CylHeight_2) / TotalHeight;
     var geometry2 = new THREE.CylinderBufferGeometry(
       CylButmSize_1,
       CylButmSize_2,
-       CylHeight_2, 
-       50, 7, true);
+      CylHeight_2,
+      40, 5, true);
     var material2 = new THREE.MeshBasicMaterial({
       wireframe: true,
       skinning: true,
-      color: '#55d4b9'
+      color: 'rgb(82,222,191)',
+      opacity: 0.8
+    });
+    var materialColor2 = new THREE.MeshBasicMaterial({
+      color: 'rgb(88,107,121)',
+      transparent: true,
+      opacity: 0.75
 
-    });    
+    });
     var cube2 = new THREE.Mesh(geometry2, material2);
+    var cubeColor2 = new THREE.Mesh(geometry2, materialColor2);
 
-    let CylHeight_3=TotalHeight*0.06;
-    let CylButmSize_3=(TotalHeight-CylHeight_1-CylHeight_2-CylHeight_3)/2;
+    let CylHeight_3 = TotalHeight * 0.12;
+    let CylButmSize_3 = (TotalHeight - CylHeight_1 - CylHeight_2 - CylHeight_3) / TotalHeight;
     var geometry3 = new THREE.CylinderBufferGeometry(
-      CylButmSize_2, CylButmSize_3, CylHeight_3, 50, 3, true
-      );
+      CylButmSize_2, CylButmSize_3, CylHeight_3, 40, 3, true
+    );
     var material3 = new THREE.MeshBasicMaterial({
       wireframe: true,
       skinning: true,
-      color: '#a7f344'
-
-    });    
+      // color: 'rgb(0,216,132)',
+      color:'rgb(0,255,175)',
+      opacity: 0.7
+    });
+    var materialColor3 = new THREE.MeshBasicMaterial({
+      // wireframe: true,
+      // skinning: true,
+      color: 'rgb(0,136,0)',
+      transparent: true,
+      opacity: 0.8
+    });
     var cube3 = new THREE.Mesh(geometry3, material3);
+    var cubeColor3 = new THREE.Mesh(geometry3, materialColor3);
 
-
-    let CylHeight_4=TotalHeight*0.29;
-    let CylButmSize_4=(TotalHeight-CylHeight_1-CylHeight_2-CylHeight_3-CylHeight_4)/2;
+    let CylHeight_4 = TotalHeight * 0.43;
+    let CylButmSize_4 = (TotalHeight - CylHeight_1 - CylHeight_2 - CylHeight_3 - CylHeight_4) / TotalHeight;
     var geometry4 = new THREE.CylinderBufferGeometry(
-      CylButmSize_3, 
+      CylButmSize_3,
       CylButmSize_4,
-     CylHeight_4,
-     40, 5, true);
+      CylHeight_4,
+      65, 6, true);
+    var geometryColor4 = new THREE.CylinderBufferGeometry(
+      CylButmSize_3,
+      CylButmSize_4,
+      CylHeight_4*0.9987,
+      500, 20, true);
     var material4 = new THREE.MeshBasicMaterial({
       wireframe: true,
       skinning: true,
-      color: '#004ccb'
+      color: '#00fefd',
+      // transparent: true,
+      // opacity: 0.95,
 
-    });    
+
+    });
+    var materialColor4 = new THREE.MeshBasicMaterial({
+      // wireframe: true,
+      // skinning: true,
+      // color: '#004ccb',
+      color:'rgb(0,23,205)',
+      transparent: true,
+      opacity: 1
+
+    });
+    var materialColor4_2 = new THREE.MeshBasicMaterial({
+      // wireframe: true,
+      // skinning: true,
+      color: 'rgb(0,21,46)',
+      transparent: true,
+      opacity: 0.1,
+
+
+    });
     var cube4 = new THREE.Mesh(geometry4, material4);
+    var cubeColor4 = new THREE.Mesh(geometryColor4, materialColor4);
+    
 
     var light = new THREE.AmbientLight(0x404040); // soft white light
     // scene.add(light);
     scene.add(cube);
+    scene.add(cubeColor);
     scene.add(cube2);
+    scene.add(cubeColor2);
     scene.add(cube3);
+    scene.add(cubeColor3);
     scene.add(cube4);
+    scene.add(cubeColor4);
+    
+
     scene.add(cubeTop);
 
-    let v=new THREE.Vector3(0,0,0);
-    camera.position.set(0,0,2.5);
+    let v = new THREE.Vector3(0, 0, 0);
+    camera.position.set(0, 1.5, 2.5);
     camera.lookAt(v);
 
-    
+
 
     console.log(camera.position);
     // camera.position.y = 0.2;
-    let PosY=0.6
+    let PosY = 1
     cubeTop.position.y = PosY;
-    cube.position.y =PosY- CylHeight_1/2;
-    cube2.position.y = PosY-CylHeight_1-CylHeight_2/2;
-    cube3.position.y = PosY-CylHeight_1-CylHeight_2-CylHeight_3/2;
-    cube4.position.y = PosY-CylHeight_1-CylHeight_2-CylHeight_3-CylHeight_4/2;
+    cube.position.y = PosY - CylHeight_1 / 2;
+    cubeColor.position.y = PosY - CylHeight_1 / 2;
 
-    let rotateX=0;
+    cube2.position.y = PosY - CylHeight_1 - CylHeight_2 / 2;
+    cubeColor2.position.y = PosY - CylHeight_1 - CylHeight_2 / 2;
+
+    cube3.position.y = PosY - CylHeight_1 - CylHeight_2 - CylHeight_3 / 2;
+    cubeColor3.position.y = PosY - CylHeight_1 - CylHeight_2 - CylHeight_3 / 2;
+
+    cube4.position.y = PosY - CylHeight_1 - CylHeight_2 - CylHeight_3 - CylHeight_4 / 2;
+    cubeColor4.position.y = PosY - CylHeight_1 - CylHeight_2 - CylHeight_3 - CylHeight_4 / 2;    
+    
+    cubeTop.rotation.y -= 0.5;
+    cube.rotation.y -= 0.5;
+    cube2.rotation.y -= 0.5;
+    cube3.rotation.y -= 0.5;
+    cube4.rotation.y -= 0.5;
+    let rotateX = 0;
     cubeTop.rotation.x += rotateX;
     cube.rotation.x += rotateX;
     cube2.rotation.x += rotateX;
@@ -128,35 +199,24 @@
     cube4.rotation.x += rotateX;
 
     cube2.rotation.x += 0;
-    let angel=3;
+    let angel = 0;
     function animate() {
       requestAnimationFrame(animate);
       // cube.rotation.x += 0.01;
       // cube.rotation.y -= 0.001;
       // cube2.rotation.y -= 0.001;
       // cube3.rotation.y -= 0.001;
-      // cube4.rotation.y -= 0.001;
+      
       // cubeTop.rotation.y -= 0.001;
       // angel+=0.00001;
-      angel+=0.5
-      camera.position.z =2.5- 2.5*Math.cos(angel*Math.PI/180);
-      camera.position.x =0+ 2.5*Math.cos(angel*Math.PI/180);
+      // angel+=115;
+      
+      angel += 0.1;
+      camera.position.z = 0 - 2.5 * Math.cos(angel * Math.PI / 180);
+      camera.position.x = 0 - 2.5 * Math.sin(angel * Math.PI / 180);
       console.log(camera.position.x);
+      camera.lookAt(v);
 
-      
-      // if(camera.position.z<0 || camera.position.z>2.5){
-      //   camera.position.z+=0.001;
-      // }else{
-      //   camera.position.z-=0.001;
-      // }
-      
-      // camera.position.x+=0.001
-
-
-      // camera.position.x += 0+Math.sin(angel*Math.PI/180);
-      
-      // camera.rotation.y+=0.01;
-      // camera.lookAt(v);
 
       renderer.render(scene, camera);
     }
