@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>NumberAnimate</title>
+  <style>
+    .add:hover ,.less:hover{
+      cursor: pointer;
+    }
+    .add,.less{
+      border: 1.5px navy solid;
+      border-radius: 10%;
+      background: rgb(55, 89, 240);
+      color:white;
+      line-height: 3;
+      padding: 5px;
+    }
+  </style>
+</head>
+<body>
+  <div>
+    <span id="num">67</span>
+  </div>
+  <p></p>
+  <div>
+    <span onclick="change(11)" class="add">Add11</span>
+    <span onclick="change(101)" class="add">Add101</span>
+    <span onclick="change(-11)" class="add">less11</span>
+    <span onclick="change(-101)" class="add">less101</span>
+    <span onclick="change(501)" class="add">Add501</span>
+    <span onclick="change(1001)" class="add">Add1001</span>
+  </div>
+  <span onclick="less10()" class="less">Less10</span>
+  <script>
+    const number=document.getElementById('num');
+    function add10(){
+      // number.innerText=parseInt( number.innerText)+10;
+      let start=10;
+      while(start>0){
+        setTimeout(function(){
+          number.innerText=parseInt( number.innerText)+1;
+          
+        })
+        start--;
+      }
+    }
+    function change(num){
+        let flag;
+        if(num>0){
+          flag=1;
+        }else{
+          flag=-1;
+        }
+        let scale=num<50 && num>-50?0:Math.round(Math.log10(Math.abs(num)))-1;
+        console.log('log10:,',Math.log10(num));
+        console.log('scale:',scale);
+        setTimeout(()=>{
+          number.innerText=parseInt( number.innerText)+10**scale*flag;
+          if(num>1){
+            change(num-10**scale);
+          }else if(num<-1){
+            change(num+10**scale);
+          }                              
+        },20)
+        // clearTimeout;
+      
+    }
+    function less10(){
+      number.innerText=parseInt( number.innerText)-10;
+      let start=10;
+      while(start>0){
+        setTimeout(function(){
+          number.innerText=parseInt( number.innerText)-1;
+            
+        },20*start)
+        start--;
+      }
+
+
+    }
+    // setInterval(()=>{
+    //   number.innerText=parseInt( number.innerText)+10;
+    // },1000)
+
+  </script>
+</body>
+</html>
